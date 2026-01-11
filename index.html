@@ -52,8 +52,12 @@
             <div class="todo-container">
                 <div class="addTask">
                     <form>
-                        <input type="text" placeholder="Add Task">
-                        <textarea placeholder="Enter your details"></textarea>
+                        <input type="text" required placeholder="Add Task">
+                        <textarea required placeholder="Enter your details"></textarea>
+                        <div class="mark-imp">
+                            <input type="checkbox"  id="check">
+                            <label for="checkbox">Mark as Important</label>
+                        </div>
                         <button>Submit</button>
                     </form>
                 </div>

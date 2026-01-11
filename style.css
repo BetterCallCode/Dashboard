@@ -189,7 +189,7 @@ section.allElems{
 
 .todo-container .addTask form button{
     padding: 10px 20px;
-    font-size: 25px;
+    font-size: 22px;
     width: 100%;
     background-color: var(--tri2);
     cursor: pointer;
@@ -242,3 +242,4 @@ section.allElems{
     cursor: pointer;
     font-weight: 700;
 }
+
