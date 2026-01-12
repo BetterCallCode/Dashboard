@@ -18,51 +18,65 @@ function openFeatures() {
 
 openFeatures();
 
-let form = document.querySelector(".addTask form");
-let taskInput = document.querySelector(".addTask form input");
-let taskDetailsInput = document.querySelector(".addTask form textarea");
-let taskCheckbox = document.querySelector(".addTask form #check");
+function todoList() {
+  let form = document.querySelector(".addTask form");
+  let taskInput = document.querySelector(".addTask form input");
+  let taskDetailsInput = document.querySelector(".addTask form textarea");
+  let taskCheckbox = document.querySelector(".addTask form #check");
 
-var currentTask = [];
+  var currentTask = [];
 
-if(localStorage.getItem('currentTask')){
-  currentTask = JSON.parse(localStorage.getItem('currentTask'))
-}else{
-  console.log('hello');
-}
+  if (localStorage.getItem("currentTask")) {
+    currentTask = JSON.parse(localStorage.getItem("currentTask"));
+  } else {
+    console.log("hello");
+  }
 
-function renderTask() {
-  let allTask = document.querySelector(".allTask");
+  function renderTask() {
+    let allTask = document.querySelector(".allTask");
 
-  let sum = "";
+    let sum = "";
 
-  currentTask.forEach(function (elem) {
-    sum += `<div class="task">
+    currentTask.forEach(function (elem, id) {
+      sum += `<div class="task">
               <h5>${elem.task} <span class=${elem.imp}>Imp</span></h5>
-              <button>Mark as Completed</button>
+              <h4 class=details>${elem.details}</h4>
+              <button id=${id}>Mark as Completed</button>
           </div>
                 `;
-  });
+    });
 
-  allTask.innerHTML = sum;
-}
+    allTask.innerHTML = sum;
 
-renderTask();
-
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  currentTask.push({
-    task: taskInput.value,
-    details: taskDetailsInput.value,
-    imp: taskCheckbox.checked
-  })
-
-  localStorage.setItem('currentTask', JSON.stringify(currentTask))  
-  taskInput.value = ''
-  taskDetailsInput.value = ''
-  taskCheckbox.checked = false
+    localStorage.setItem("currentTask", JSON.stringify(currentTask));
+  }
 
   renderTask();
-});
 
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    currentTask.push({
+      task: taskInput.value,
+      details: taskDetailsInput.value,
+      imp: taskCheckbox.checked,
+    });
+
+    taskInput.value = "";
+    taskDetailsInput.value = "";
+    taskCheckbox.checked = false;
+
+    renderTask();
+  });
+
+  let allTask = document.querySelector(".allTask");
+
+  allTask.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON") {
+      const id = e.target.id;
+      currentTask.splice(id, 1);
+      renderTask();
+    }
+  });
+}
+
+todoList();

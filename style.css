@@ -125,10 +125,6 @@ section.allElems{
     scale: 0.97;
 }
 
-.todo-list-fullpage{
-    display: block;
-}
-
 .todo-list-fullpage h2{
     font-size: 60px;
     font-weight: 700;
@@ -261,6 +257,10 @@ section.allElems{
     border-radius: 10px;
     cursor: pointer;
     font-weight: 700;
+}
+
+.task button:active{
+    scale: 0.95;
 }
 
 .mark-imp{
