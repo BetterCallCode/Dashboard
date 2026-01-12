@@ -23,23 +23,13 @@ let taskInput = document.querySelector(".addTask form input");
 let taskDetailsInput = document.querySelector(".addTask form textarea");
 let taskCheckbox = document.querySelector(".addTask form #check");
 
-let currentTask = [
-  {
-    task: "Hello world",
-    details: "Lala ram babu shayam",
-    imp: true,
-  },
-  {
-    task: "Coding",
-    details: "react js",
-    imp: true,
-  },
-  {
-    task: "Maths",
-    details: "basic maths",
-    imp: false,
-  },
-];
+var currentTask = [];
+
+if(localStorage.getItem('currentTask')){
+  currentTask = JSON.parse(localStorage.getItem('currentTask'))
+}else{
+  console.log('hello');
+}
 
 function renderTask() {
   let allTask = document.querySelector(".allTask");
@@ -62,4 +52,17 @@ renderTask();
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  currentTask.push({
+    task: taskInput.value,
+    details: taskDetailsInput.value,
+    imp: taskCheckbox.checked
+  })
+
+  localStorage.setItem('currentTask', JSON.stringify(currentTask))  
+  taskInput.value = ''
+  taskDetailsInput.value = ''
+  taskCheckbox.checked = false
+
+  renderTask();
 });
+
